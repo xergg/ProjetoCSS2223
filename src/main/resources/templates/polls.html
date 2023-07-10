@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::section})}">
+
+<body>
+    <section>
+        <h2>Polls List:</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>view</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="poll : ${polls}">
+                    <td th:text="${poll.name}"></td>
+                    <td>
+                        <a th:href="@{/polls/} + ${poll.id}" class="btn btn-primary">View</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+
+</html>

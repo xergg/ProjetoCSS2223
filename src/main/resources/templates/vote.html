@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::section})}">
+
+    <body>
+        <section>
+
+            <h2>Add your vote</h2>
+
+            <form th:action="@{/polls/{id}/vote(id=${poll.id})}" method="post">
+
+                <select disabled>
+                    <option th:value="${poll.id}" th:text="${poll.name}"></option>
+                  </select>
+                  <input type="hidden" th:name="poll" th:value="${poll.id}" />
+
+                  <select disabled>
+                    <option th:value="${citizen.id}" th:text="${citizen.name}"></option>
+                  </select>
+                  <input type="hidden" th:name="citizenid" th:value="${citizen.id}" />
+
+                <div th:if="${delegateVote != null}">
+
+                    <p th:text="'Current Delegate Vote : ' + ${delegateVote}"></p>
+                    <label for="delegatevotes">Do you want to use you Assigned Delegate Vote for this poll:</label><br>
+                    <select id="delegatevotes" name="delegatevotes" required>
+                    <option value="">Select a Option</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                    </select><br><br>
+
+                </div>
+
+                <div th:if="${delegateVote == null}">
+                    <p>No delegate vote available for this poll.</p>
+                    <input type="hidden" th:name="delegatevotes" id="delegatevotes" value="false" />
+                </div>
+
+
+                <div th:if="${delegatevotes != 'true'}">
+                    <label for="choice">Should this proposal go forward:</label><br>
+                    <select id="choice" name="choice" required>
+                    <option value="">Select a Option</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                    </select><br><br>
+                </div>
+
+                <div th:if="${delegatevotes == 'true'}">
+                    <input type="hidden" th:name="choice" value="false" />
+                </div>
+
+                <button type="submit">Vote</button>
+            </form>
+
+        </section>
+
+
+    </body>
+
+
+</html>

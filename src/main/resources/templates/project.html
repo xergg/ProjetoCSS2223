@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::section})}">
+
+<body>
+    <section>
+        <div>
+            <h2 th:text="${project.title}"></h2>
+            <p th:text="'Project text: ' + ${project.text}"></p>
+            <p th:text="'Signatures : ' + ${project.signatures.size()}"></p>
+            <p th:text="'Is ongoing : ' + ${project.ongoing}"></p>
+            <p th:text="'Assigned Delegate : ' + ${project.delegate.name}"></p>
+            <p th:text="'Related theme : ' + ${project.theme.name}"></p>
+            <p th:text="'End Date: ' + ${project.d}"></p>
+        </div>
+        <form th:action="@{/projects/{id}/support(id=${project.id})}" method="post">
+
+            <label for="userid">Current User:</label><br>
+                <select id="userid" name="userid" required>
+                <option value="">Select a User</option>
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+            </select><br><br>
+
+            <button type="submit" class="btn btn-primary">Support</button>
+        </form>
+
+        <div th:if="${mensagem_de_sucesso}">
+            <p th:text="${mensagem_de_sucesso}"></p>
+        </th:if>
+    </section>
+</body>
+
+</html>

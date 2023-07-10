@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <div th:replace="layout :: layout(~{::section})">
+        <section th:fragment="content">
+            <h2>Success assigning delegate</h2>
+        </section>
+    </div>
+</body>
+
+</html>

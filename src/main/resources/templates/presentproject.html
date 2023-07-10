@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html th:replace="~{layout :: layout(~{::section})}">
+
+  <body>
+      <section>
+        <h2>Apresentar Projeto de Lei</h2>
+
+        <div class="error" th:text="${error}"></div>
+
+        <form action="#" th:action="@{/project/new}" method="post">
+
+          <label for="userid">Current Delegate:</label><br>
+                <select id="userid" name="userid" required>
+                <option value="">Select a User</option>
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+            </select><br><br>
+
+          <label for="titulo">Título do Projeto:</label><br>
+          <input type="text" id="titulo" name="titulo" required pattern=".*\S.*"><br><br>
+
+          <label for="descricao">Descrição do Projeto:</label><br>
+          <textarea id="descricao" name="descricao" required pattern=".*\S.*"></textarea><br><br>
+
+          <label for="data_validade">Data e Hora de Validade:</label><br>
+          <input type="datetime-local" id="data_validade" name="data_validade" required><br><br>
+
+          <label for="tema">Tema:</label><br>
+          <select id="tema" name="tema" required>
+            <option value="">Select a theme</option>
+            <!-- Iterate over the themes and populate the options -->
+            <option th:each="theme : ${temas}" th:value="${theme.name}" th:text="${theme.name}"></option>
+          </select><br><br>
+
+          <input type="submit" value="Submit Project">
+        </form>
+      </section>
+  </body>
+
+</html>
+
+
+<script>
+  // Get the current date and time
+  var now = new Date().toISOString().slice(0, 16);
+
+  // Set the minimum value of the input field to the current date and time
+  document.getElementById("data_validade").setAttribute("min", now);
+</script>

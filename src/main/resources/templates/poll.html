@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::section})}">
+
+<body>
+    <section>
+        <div>
+            <h2 th:text="${poll.name}"></h2>
+            <p th:text="'Negative Votes : ' + ${poll.negativeVotes}"></p>
+            <p th:text="'Positive Votes : ' + ${poll.positiveVotes}"></p>
+            <p th:text="'Associated Project : ' + ${poll.name}"></p>
+            <p th:text="'Status : ' + ${poll.statusPoll}"></p>
+            <p th:text="'Finishes at : ' + ${poll.endDate}"></p>
+        </div>
+
+        <form th:action="@{/polls/{id}(id=${poll.id})}" method="post">
+
+            <label for="userid">Current Delegate:</label><br>
+            <select id="userid" name="userid" required>
+            <option value="">Select a User</option>
+            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+            </select><br><br>
+
+            <button type="submit">Select User</button>
+        </form>
+
+    </section>
+</body>
+
+</html>
